@@ -123,15 +123,13 @@ export default function App() {
                   {label}
                 </NavLink>
               ))}
-              <a
-                href="https://www.stepupcanada.online/login"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                onClick={() => scrollToSection('stepupcanada')}
                 className="group relative px-5 py-2 text-xs tracking-widest bg-white text-[#8B0000] border border-[#8B0000] overflow-hidden transition-all duration-300 hover:text-white"
               >
-                <span className="relative z-10">STEP UP CANADA ↗</span>
+                <span className="relative z-10">STEP UP CANADA</span>
                 <div className="absolute inset-0 bg-[#8B0000] translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-              </a>
+              </button>
             </div>
 
             {/* Animated Hamburger Button */}
@@ -182,14 +180,12 @@ export default function App() {
                 className={`pt-3 border-t border-black/5 transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
                 style={{ transitionDelay: mobileMenuOpen ? '350ms' : '0ms' }}
               >
-                <a
-                  href="https://www.stepupcanada.online/login"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => scrollToSection('stepupcanada')}
                   className="block py-2 text-xs tracking-widest text-[#8B0000] font-light hover:opacity-70 transition-opacity"
                 >
-                  STEP UP CANADA ↗
-                </a>
+                  STEP UP CANADA
+                </button>
               </div>
             </div>
           </div>
@@ -613,46 +609,70 @@ export default function App() {
       </section>
 
       {/* Step Up Canada Portal Section */}
-      <section className="py-24 px-6 md:px-12 bg-[#F5F5F5]">
+      <section id="stepupcanada" className="py-24 px-6 md:px-12 bg-[#F5F5F5]">
         <div className="max-w-5xl mx-auto">
+          {/* Section header */}
           <AnimateIn>
-            <div className="border border-black/10 bg-white p-10 md:p-14 relative overflow-hidden">
-              {/* Red accent corner */}
-              <div className="absolute top-0 left-0 w-1 h-full bg-[#8B0000]" />
-
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 pl-6">
-                <div className="flex-1">
-                  <div className="text-xs tracking-widest text-[#8B0000] mb-4">ONLINE PLATFORM</div>
-                  <h3 className="text-2xl md:text-3xl tracking-wide font-light mb-4">
-                    Step Up Canada — Student Portal
-                  </h3>
-                  <p className="text-base opacity-70 font-light leading-relaxed max-w-xl">
-                    Access our online test simulation system designed to help you practice and prepare for your exams from anywhere. Track your progress, take mock tests, and sharpen your skills before the real thing.
-                  </p>
-                  <div className="mt-6 flex flex-wrap gap-6 text-sm opacity-50 font-light">
-                    <span>✓ Mock exam simulations</span>
-                    <span>✓ Progress tracking</span>
-                    <span>✓ Practice anytime, anywhere</span>
-                    <span>✓ 1 on 1 booking session</span>
-                  </div>
-                </div>
-
-                <div className="flex-shrink-0">
-                  <a
-                    href="https://www.stepupcanada.online/login"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative inline-flex items-center gap-3 px-10 py-5 bg-[#8B0000] text-white overflow-hidden transition-all duration-300 hover:shadow-lg"
-                  >
-                    <span className="relative z-10 tracking-widest text-sm">ACCESS PORTAL</span>
-                    <span className="relative z-10 text-lg transition-transform duration-300 group-hover:translate-x-1">↗</span>
-                    <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                  </a>
-                  <div className="mt-3 text-xs opacity-40 text-center tracking-wide">stepupcanada.online</div>
-                </div>
-              </div>
+            <div className="mb-12">
+              <div className="text-xs tracking-widest text-[#8B0000] mb-3">STEP UP CANADA</div>
+              <h2 className="text-3xl md:text-4xl tracking-wide font-light">Online Learning Platform</h2>
+              <div className="mt-4 h-px w-12 bg-[#8B0000]" />
             </div>
           </AnimateIn>
+
+          {/* Two-column layout: portal info left, sample test right */}
+          <div className="grid md:grid-cols-2 gap-6 items-stretch">
+            {/* Portal card */}
+            <AnimateIn>
+              <div className="border border-black/10 bg-white p-10 relative overflow-hidden h-full">
+                <div className="absolute top-0 left-0 w-1 h-full bg-[#8B0000]" />
+                <div className="pl-4">
+                  <div className="text-xs tracking-widest text-[#8B0000] mb-4">STUDENT PORTAL</div>
+                  <h3 className="text-xl md:text-2xl tracking-wide font-light mb-4">
+                    Step Up Canada — Student Portal
+                  </h3>
+                  <p className="text-sm opacity-70 font-light leading-relaxed">
+                    Access our online test simulation system designed to help you practice and prepare for your exams from anywhere. Track your progress, take mock tests, and sharpen your skills before the real thing.
+                  </p>
+                  <div className="mt-6 space-y-2 text-sm opacity-50 font-light">
+                    <div>✓ Mock exam simulations</div>
+                    <div>✓ Progress tracking</div>
+                    <div>✓ Practice anytime, anywhere</div>
+                    <div>✓ 1 on 1 booking session</div>
+                  </div>
+                  <div className="mt-8">
+                    <a
+                      href="https://www.stepupcanada.online/signup"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#8B0000] text-white overflow-hidden transition-all duration-300 hover:shadow-lg"
+                    >
+                      <span className="relative z-10 tracking-widest text-sm">ACCESS PORTAL</span>
+                      <div className="absolute inset-0 bg-black translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                    </a>
+                    <div className="mt-3 text-xs opacity-40 tracking-wide">stepupcanada.online</div>
+                  </div>
+                </div>
+              </div>
+            </AnimateIn>
+
+            {/* Sample test card */}
+            <AnimateIn delay={150}>
+              <div className="border border-black/10 bg-white relative overflow-hidden h-full flex flex-col">
+                <div className="absolute top-0 left-0 w-1 h-full bg-[#8B0000]" />
+                <div className="pl-4 flex flex-col flex-1">
+                  <div className="border-b border-black/5 px-6 py-5 flex items-center justify-between">
+                    <div>
+                      <div className="text-xs tracking-widest text-[#8B0000] mb-1">SAMPLE TEST</div>
+                      <div className="text-sm font-light tracking-wide">Grammar &amp; Vocabulary — Quick Assessment</div>
+                    </div>
+                    <div className="text-xs opacity-30 tracking-widest hidden sm:block">5 QUESTIONS</div>
+                  </div>
+                  <div className="p-6 flex-1"><MiniTest /></div>
+                </div>
+              </div>
+            </AnimateIn>
+          </div>
         </div>
       </section>
 
@@ -710,12 +730,12 @@ export default function App() {
           <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 text-xs">
             <span className="opacity-30">© 2026 Step Up PH. All rights reserved.</span>
             <a
-              href="https://www.stepupcanada.online/login"
+              href="https://www.stepupcanada.online/signup"
               target="_blank"
               rel="noopener noreferrer"
               className="tracking-widest bg-white text-[#8B0000] px-3 py-1 hover:bg-[#8B0000] hover:text-white transition-all duration-200 self-start sm:self-auto"
             >
-              STEP UP CANADA ↗
+              STEP UP CANADA
             </a>
           </div>
         </div>
@@ -833,6 +853,149 @@ function CenterFeature({ text }: { text: string }) {
     <div className="flex items-start gap-3 p-4 border border-black/5 bg-white transition-all duration-300 hover:border-[#8B0000]/30">
       <HiOutlineCheckCircle className="w-5 h-5 text-[#8B0000] flex-shrink-0 mt-0.5" />
       <span className="text-sm opacity-80 font-light">{text}</span>
+    </div>
+  );
+}
+
+const MINI_TEST_QUESTIONS = [
+  {
+    question: "Choose the correct sentence:",
+    options: [
+      "She don't know the answer.",
+      "She doesn't knows the answer.",
+      "She doesn't know the answer.",
+      "She not know the answer.",
+    ],
+    answer: 2,
+  },
+  {
+    question: "Select the word closest in meaning to 'diligent':",
+    options: ["Lazy", "Hardworking", "Careless", "Restless"],
+    answer: 1,
+  },
+  {
+    question: "Which sentence uses the present perfect correctly?",
+    options: [
+      "I have went to Canada last year.",
+      "I went to Canada last year.",
+      "I have been to Canada last year.",
+      "I have go to Canada before.",
+    ],
+    answer: 1,
+  },
+  {
+    question: "Choose the correct preposition: 'She is good ___ English.'",
+    options: ["in", "on", "at", "for"],
+    answer: 2,
+  },
+  {
+    question: "Which word best completes the sentence? 'The instructions were ___; no one understood them.'",
+    options: ["clear", "ambiguous", "simple", "brief"],
+    answer: 1,
+  },
+];
+
+function MiniTest() {
+  const [current, setCurrent] = useState(0);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [answers, setAnswers] = useState<(number | null)[]>(Array(MINI_TEST_QUESTIONS.length).fill(null));
+  const [submitted, setSubmitted] = useState(false);
+
+  const progress = ((current) / MINI_TEST_QUESTIONS.length) * 100;
+  const q = MINI_TEST_QUESTIONS[current];
+
+  function handleSelect(idx: number) {
+    if (submitted) return;
+    setSelected(idx);
+  }
+
+  function handleNext() {
+    const updated = [...answers];
+    updated[current] = selected;
+    setAnswers(updated);
+    if (current < MINI_TEST_QUESTIONS.length - 1) {
+      setCurrent(current + 1);
+      setSelected(updated[current + 1] ?? null);
+    } else {
+      setSubmitted(true);
+    }
+  }
+
+  function handleRetry() {
+    setCurrent(0);
+    setSelected(null);
+    setAnswers(Array(MINI_TEST_QUESTIONS.length).fill(null));
+    setSubmitted(false);
+  }
+
+  if (submitted) {
+    const score = answers.filter((a, i) => a === MINI_TEST_QUESTIONS[i].answer).length;
+    const pct = (score / MINI_TEST_QUESTIONS.length) * 100;
+    let band = "";
+    let message = "";
+    if (pct === 100) { band = "Excellent"; message = "Outstanding! You're well-prepared for advanced English exams."; }
+    else if (pct >= 80) { band = "Proficient"; message = "Great work! A little more practice and you'll be exam-ready."; }
+    else if (pct >= 60) { band = "Developing"; message = "Good foundation. Our program can help you reach your target score."; }
+    else { band = "Beginner"; message = "No worries — this is exactly where Step Up Canada can help you grow."; }
+
+    return (
+      <div className="text-center py-4">
+        <div className="text-xs tracking-widest text-[#8B0000] mb-2">YOUR RESULT</div>
+        <div className="text-4xl font-light tracking-wide mb-1">{score}<span className="text-lg opacity-40">/{MINI_TEST_QUESTIONS.length}</span></div>
+        <div className="text-sm tracking-widest font-light mb-1 text-[#8B0000]">{band}</div>
+        <p className="text-sm opacity-60 font-light max-w-sm mx-auto mb-6">{message}</p>
+        <div className="w-full bg-black/5 h-1.5 mb-6 rounded-full overflow-hidden">
+          <div className="h-full bg-[#8B0000] transition-all duration-700" style={{ width: `${pct}%` }} />
+        </div>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <button onClick={handleRetry} className="px-6 py-3 border border-black/20 text-xs tracking-widest font-light hover:border-[#8B0000] transition-colors duration-200">
+            TRY AGAIN
+          </button>
+          <a href="https://www.stepupcanada.online/signup" target="_blank" rel="noopener noreferrer"
+            className="px-6 py-3 bg-[#8B0000] text-white text-xs tracking-widest font-light hover:bg-black transition-colors duration-200">
+            TAKE FULL TEST
+          </a>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {/* Progress bar */}
+      <div className="flex items-center gap-4 mb-6">
+        <div className="flex-1 bg-black/5 h-1 rounded-full overflow-hidden">
+          <div className="h-full bg-[#8B0000] transition-all duration-500" style={{ width: `${progress}%` }} />
+        </div>
+        <span className="text-xs tracking-widest opacity-40">{current + 1}/{MINI_TEST_QUESTIONS.length}</span>
+      </div>
+
+      <p className="text-sm font-light leading-relaxed mb-5 tracking-wide">{q.question}</p>
+
+      <div className="space-y-2 mb-6">
+        {q.options.map((opt, idx) => (
+          <button
+            key={idx}
+            onClick={() => handleSelect(idx)}
+            className={`w-full text-left px-4 py-3 text-sm font-light tracking-wide border transition-all duration-200 ${
+              selected === idx
+                ? "border-[#8B0000] bg-[#8B0000]/5 text-[#8B0000]"
+                : "border-black/10 hover:border-[#8B0000]/40"
+            }`}
+          >
+            <span className="opacity-40 mr-3 text-xs">{String.fromCharCode(65 + idx)}.</span>
+            {opt}
+          </button>
+        ))}
+      </div>
+
+      <button
+        onClick={handleNext}
+        disabled={selected === null}
+        className="px-8 py-3 bg-[#8B0000] text-white text-xs tracking-widest font-light disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black transition-colors duration-200"
+      >
+        {current === MINI_TEST_QUESTIONS.length - 1 ? "SUBMIT" : "NEXT"}
+      </button>
     </div>
   );
 }
