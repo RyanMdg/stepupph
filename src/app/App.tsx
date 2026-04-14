@@ -81,13 +81,26 @@ export default function App() {
     e.preventDefault();
     setFormStatus('sending');
     try {
-      const res = await fetch('https://formspree.io/f/admin@stepupcanada.online', {
+      const res = await fetch('https://formsubmit.co/ajax/admin@stepupcanada.online', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...formData, _replyto: formData.email }),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          program: formData.program,
+          message: formData.message,
+          _subject: `New Inquiry from ${formData.name} — ${formData.program || 'General'}`,
+          _replyto: formData.email,
+          _captcha: 'false',
+        }),
       });
-      if (res.ok) { setFormStatus('success'); setFormData({ name: '', email: '', program: '', message: '' }); }
-      else setFormStatus('error');
+      const data = await res.json();
+      if (res.ok && data.success === 'true') {
+        setFormStatus('success');
+        setFormData({ name: '', email: '', program: '', message: '' });
+      } else {
+        setFormStatus('error');
+      }
     } catch { setFormStatus('error'); }
   };
 
