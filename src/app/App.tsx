@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
 import heroImg from '../imports/hero.jpg';
 import logoImg from '../imports/WhatsApp_Image_2026-04-10_at_4.26.19_PM.jpeg';
+
+emailjs.init('sIAURMIM1n67a8qeS');
 import {
   HiOutlineAcademicCap,
   HiOutlineBriefcase,
@@ -13,8 +16,6 @@ import {
   HiOutlineShieldCheck,
   HiOutlineClipboardDocumentCheck,
   HiOutlineArrowTrendingUp,
-  HiOutlineBars3,
-  HiOutlineXMark
 } from 'react-icons/hi2';
 
 function useInView(threshold = 0.15) {
@@ -81,27 +82,17 @@ export default function App() {
     e.preventDefault();
     setFormStatus('sending');
     try {
-      const res = await fetch('https://formsubmit.co/ajax/admin@stepupcanada.online', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          program: formData.program,
-          message: formData.message,
-          _subject: `New Inquiry from ${formData.name} — ${formData.program || 'General'}`,
-          _replyto: formData.email,
-          _captcha: 'false',
-        }),
+      await emailjs.send('service_togvp1n', 'template_oacoo9o', {
+        from_name: formData.name,
+        from_email: formData.email,
+        program: formData.program || 'General Inquiry',
+        message: formData.message,
       });
-      const data = await res.json();
-      if (res.ok && data.success === 'true') {
-        setFormStatus('success');
-        setFormData({ name: '', email: '', program: '', message: '' });
-      } else {
-        setFormStatus('error');
-      }
-    } catch { setFormStatus('error'); }
+      setFormStatus('success');
+      setFormData({ name: '', email: '', program: '', message: '' });
+    } catch {
+      setFormStatus('error');
+    }
   };
 
   return (
@@ -143,30 +134,54 @@ export default function App() {
               </a>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Animated Hamburger Button */}
             <button
-              className={`md:hidden transition-colors ${scrolled ? 'text-black hover:text-[#8B0000]' : 'text-white hover:text-[#8B0000]'}`}
+              className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-[5px] group"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? <HiOutlineXMark className="w-6 h-6" /> : <HiOutlineBars3 className="w-6 h-6" />}
+              <span className={`block h-[2px] w-6 transition-all duration-300 ease-in-out origin-center ${
+                mobileMenuOpen
+                  ? 'rotate-45 translate-y-[7px] bg-[#8B0000]'
+                  : `${scrolled ? 'bg-black' : 'bg-white'} group-hover:bg-[#8B0000]`
+              }`} />
+              <span className={`block h-[2px] transition-all duration-200 ease-in-out ${
+                mobileMenuOpen ? 'w-0 opacity-0 bg-[#8B0000]' : `w-6 opacity-100 ${scrolled ? 'bg-black' : 'bg-white'} group-hover:bg-[#8B0000]`
+              }`} />
+              <span className={`block h-[2px] w-6 transition-all duration-300 ease-in-out origin-center ${
+                mobileMenuOpen
+                  ? '-rotate-45 -translate-y-[7px] bg-[#8B0000]'
+                  : `${scrolled ? 'bg-black' : 'bg-white'} group-hover:bg-[#8B0000]`
+              }`} />
             </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t border-black/5">
-            <div className="px-6 py-4 space-y-4">
+        {/* Mobile Menu — slide down */}
+        <div className={`md:hidden overflow-hidden transition-all duration-400 ease-in-out ${
+          mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+        }`}>
+          <div className="bg-white border-t border-black/5">
+            <div className="px-6 py-4 space-y-1">
               {[
                 { label: 'About', id: 'about' },
                 { label: 'Why Choose Us', id: 'why-choose-us' },
                 { label: 'How It Works', id: 'how-it-works' },
                 { label: 'Programs', id: 'programs' },
                 { label: 'Contact', id: 'contact' },
-              ].map(({ label, id }) => (
-                <MobileNavLink key={id} onClick={() => scrollToSection(id)}>{label}</MobileNavLink>
+              ].map(({ label, id }, i) => (
+                <div
+                  key={id}
+                  className={`transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
+                  style={{ transitionDelay: mobileMenuOpen ? `${i * 50 + 100}ms` : '0ms' }}
+                >
+                  <MobileNavLink onClick={() => scrollToSection(id)}>{label}</MobileNavLink>
+                </div>
               ))}
-              <div className="pt-2 border-t border-black/5">
+              <div
+                className={`pt-3 border-t border-black/5 transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
+                style={{ transitionDelay: mobileMenuOpen ? '350ms' : '0ms' }}
+              >
                 <a
                   href="https://www.stepupcanada.online/login"
                   target="_blank"
@@ -178,7 +193,7 @@ export default function App() {
               </div>
             </div>
           </div>
-        )}
+        </div>
       </nav>
 
       {/* Hero Section — full screen image */}
@@ -255,11 +270,24 @@ export default function App() {
                 <div className="absolute inset-0 bg-[#8B0000] translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
               </button>
             </div>
+
+            {/* Trusted badge — mobile (inline) */}
+            <div
+              className={`mt-8 md:hidden inline-flex items-center gap-4 bg-white/10 backdrop-blur-sm border border-white/20 px-5 py-4 transition-all duration-1000 delay-1000 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+              }`}
+            >
+              <div className="h-8 w-px bg-[#8B0000]" />
+              <div>
+                <div className="text-white/50 text-xs tracking-widest">TRUSTED BY</div>
+                <div className="text-white tracking-wide font-light">500+ Students</div>
+              </div>
+            </div>
           </div>
 
-          {/* Trusted badge */}
+          {/* Trusted badge — desktop (absolute) */}
           <div
-            className={`absolute bottom-12 right-6 md:right-12 bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-5 transition-all duration-1000 delay-1000 ${
+            className={`hidden md:block absolute bottom-12 right-12 bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-5 transition-all duration-1000 delay-1000 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
           >
@@ -322,30 +350,36 @@ export default function App() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-32 px-6 md:px-12 bg-[#F5F5F5]">
-        <div className="max-w-5xl mx-auto">
+      <section id="how-it-works" className="py-32 bg-[#F5F5F5] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 md:px-12">
           <AnimateIn>
-            <SectionTitle>How It Works</SectionTitle>
+            <div className="text-center mb-20">
+              <div className="inline-block relative">
+                <div className="absolute -left-20 top-1/2 w-12 h-px bg-[#8B0000]" />
+                <div className="absolute -right-20 top-1/2 w-12 h-px bg-[#8B0000]" />
+                <h2 className="tracking-[0.2em] text-[clamp(1.5rem,4vw,2.5rem)] font-light text-black">How It Works</h2>
+              </div>
+            </div>
           </AnimateIn>
 
-          <div className="mt-20 space-y-16">
+          <div className="space-y-4">
             {[
-              { number: '01', title: 'Initial Consultation & Assessment', description: 'We start with a one-on-one session to understand your goals, current level, and specific needs. This includes a guided assessment to identify strengths and areas for improvement, allowing us to create a learning plan aligned with what you want to achieve.' },
-              { number: '02', title: 'Program Recommendation', description: 'Based on your goals and assessment results, we recommend the most suitable program and structured learning plan tailored to your objectives.' },
-              { number: '03', title: 'Structured Training Sessions', description: 'Attend guided sessions led by experienced instructors, following a strategic and results-oriented approach designed to build real-world skills.' },
-              { number: '04', title: 'Re-Assessment & Development Review', description: 'We conduct follow-up assessments to evaluate your progress and development, allowing us to refine your learning plan and ensure you are on track toward your goals.' },
-              { number: '05', title: 'Continuous Feedback & Progress Monitoring', description: 'Receive consistent feedback and track your improvement through ongoing performance monitoring, ensuring steady and measurable results.' },
-              { number: '06', title: 'Achieve Your Goals', description: 'With the right guidance and structure, you gain the skills, confidence, and readiness needed to succeed in your career, exams, or global opportunities.' },
+              { number: '01', title: 'Initial Consultation & Assessment', description: 'We start with a one-on-one session to understand your goals, current level, and specific needs — creating a learning plan aligned with what you want to achieve.', image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80', imagePosition: 'center' },
+              { number: '02', title: 'Program Recommendation', description: 'Based on your goals and assessment results, we recommend the most suitable program and structured learning plan tailored to your objectives.', image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80' },
+              { number: '03', title: 'Structured Training Sessions', description: 'Attend guided sessions led by experienced instructors, following a strategic and results-oriented approach designed to build real-world skills.', image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80' },
+              { number: '04', title: 'Re-Assessment & Development Review', description: 'We conduct follow-up assessments to evaluate your progress and refine your learning plan, ensuring you stay on track toward your goals.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80' },
+              { number: '05', title: 'Continuous Feedback & Progress Monitoring', description: 'Receive consistent feedback and track your improvement through ongoing performance monitoring, ensuring steady and measurable results.', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80' },
+              { number: '06', title: 'Achieve Your Goals', description: 'With the right guidance and structure, you gain the skills, confidence, and readiness needed to succeed in your career, exams, or global opportunities.', image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80' },
             ].map((step, i) => (
-              <AnimateIn key={step.number} delay={i * 60} direction="left">
-                <ProcessStep number={step.number} title={step.title} description={step.description} />
+              <AnimateIn key={step.number} delay={i * 60} direction={i % 2 === 0 ? 'left' : 'right'}>
+                <ProcessStep number={step.number} title={step.title} description={step.description} image={step.image} reverse={i % 2 !== 0} imagePosition={(step as any).imagePosition} />
               </AnimateIn>
             ))}
           </div>
 
           <AnimateIn delay={200} className="mt-16 text-center">
-            <p className="text-lg opacity-70 font-light italic">
-              Your progress is guided every step of the way—from your first session to achieving real, measurable results.
+            <p className="text-base text-black/40 font-light italic tracking-wide">
+              Your progress is guided every step of the way — from your first session to achieving real, measurable results.
             </p>
           </AnimateIn>
         </div>
@@ -434,18 +468,65 @@ export default function App() {
       <section id="contact" className="py-32 px-6 md:px-12 relative overflow-hidden">
         <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#8B0000] to-transparent" />
 
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <AnimateIn>
             <SectionTitle>Contact Us</SectionTitle>
           </AnimateIn>
 
-          <AnimateIn delay={100} className="mt-6 text-center space-y-2">
-            <p className="text-base opacity-60 font-light">Ready to step up your skills and unlock greater opportunities?</p>
-            <p className="text-base opacity-60 font-light">Get in touch with us to start your journey.</p>
-          </AnimateIn>
+          <div className="mt-16 grid md:grid-cols-2 gap-16 items-start">
 
-          <AnimateIn delay={200}>
-            <form onSubmit={handleFormSubmit} className="mt-14 space-y-6">
+            {/* Left — Contact Info */}
+            <AnimateIn delay={100} direction="left">
+              <p className="text-base opacity-60 font-light mb-10">
+                Ready to step up your skills and unlock greater opportunities? Get in touch with us to start your journey.
+              </p>
+
+              <div className="space-y-8">
+                <div>
+                  <div className="text-xs tracking-widests text-[#8B0000] mb-3">ADDRESS</div>
+                  <p className="text-sm font-light opacity-70 leading-relaxed mb-4">
+                    2nd Floor, Unit F Joaquin Dionisio Bldg.<br />
+                    Bayuga St. Brgy. Poblacion East<br />
+                    Science City of Muñoz, Nueva Ecija<br />
+                    Philippines
+                  </p>
+                  {/* Map embed */}
+                  <div className="w-full h-48 overflow-hidden border border-black/10">
+                    <iframe
+                      title="Step Up PH Location"
+                      src="https://www.google.com/maps?q=Science+City+of+Munoz+Nueva+Ecija+Philippines&output=embed"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="text-xs tracking-widest text-[#8B0000] mb-2">LANDLINE</div>
+                  <p className="text-sm font-light opacity-70">(044) 950-4443</p>
+                </div>
+
+                <div>
+                  <div className="text-xs tracking-widest text-[#8B0000] mb-2">MOBILE</div>
+                  <p className="text-sm font-light opacity-70">(0927) 947 9290</p>
+                  <p className="text-sm font-light opacity-70">(0961) 632 1989</p>
+                </div>
+
+                <div>
+                  <div className="text-xs tracking-widest text-[#8B0000] mb-2">EMAIL</div>
+                  <a href="mailto:admin@stepupcanada.online" className="text-sm font-light opacity-70 hover:opacity-100 hover:text-[#8B0000] transition-all duration-200 block">admin@stepupcanada.online</a>
+                  <a href="mailto:info@stepupcanada.online" className="text-sm font-light opacity-70 hover:opacity-100 hover:text-[#8B0000] transition-all duration-200 block">info@stepupcanada.online</a>
+                </div>
+              </div>
+            </AnimateIn>
+
+            {/* Right — Form */}
+            <AnimateIn delay={200}>
+            <form onSubmit={handleFormSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs tracking-widest opacity-50">FULL NAME</label>
@@ -527,6 +608,7 @@ export default function App() {
               </div>
             </form>
           </AnimateIn>
+          </div>
         </div>
       </section>
 
@@ -578,36 +660,55 @@ export default function App() {
       <footer className="bg-[#0A0A0A] text-white">
         <div className="h-px bg-gradient-to-r from-transparent via-[#8B0000] to-transparent" />
         <div className="max-w-6xl mx-auto px-6 md:px-12 py-16">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-10">
+          <div className="grid md:grid-cols-3 gap-10">
+            {/* Brand */}
             <div>
               <div className="text-2xl tracking-[0.25em] font-light text-white mb-1">
                 STEP UP <span className="text-[#8B0000]">PH</span>
               </div>
-              <div className="text-xs tracking-widest opacity-40 uppercase">
+              <div className="text-xs tracking-widest opacity-40 uppercase mb-6">
                 by Bridgeway Educational Consultancy Services
               </div>
+              <div className="flex flex-wrap gap-x-8 gap-y-3 text-xs tracking-widest opacity-50">
+                {[
+                  { label: 'About', id: 'about' },
+                  { label: 'Programs', id: 'programs' },
+                  { label: 'How It Works', id: 'how-it-works' },
+                  { label: 'Contact', id: 'contact' },
+                ].map(({ label, id }) => (
+                  <button key={id} onClick={() => scrollToSection(id)} className="hover:opacity-100 hover:text-[#8B0000] transition-all duration-200">
+                    {label.toUpperCase()}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="flex flex-wrap gap-x-10 gap-y-3 text-xs tracking-widest opacity-50">
-              {[
-                { label: 'About', id: 'about' },
-                { label: 'Programs', id: 'programs' },
-                { label: 'How It Works', id: 'how-it-works' },
-                { label: 'Contact', id: 'contact' },
-              ].map(({ label, id }) => (
-                <button key={id} onClick={() => scrollToSection(id)} className="hover:opacity-100 hover:text-[#8B0000] transition-all duration-200">
-                  {label.toUpperCase()}
-                </button>
-              ))}
+
+            {/* Address */}
+            <div>
+              <div className="text-xs tracking-widest text-[#8B0000] mb-3">FIND US</div>
+              <p className="text-xs opacity-50 font-light leading-relaxed">
+                2nd Floor, Unit F Joaquin Dionisio Bldg.<br />
+                Bayuga St. Brgy. Poblacion East<br />
+                Science City of Muñoz, Nueva Ecija<br />
+                Philippines
+              </p>
+            </div>
+
+            {/* Contact details */}
+            <div>
+              <div className="text-xs tracking-widest text-[#8B0000] mb-3">CONTACT</div>
+              <div className="space-y-1 text-xs opacity-50 font-light">
+                <p>(044) 950-4443</p>
+                <p>(0927) 947 9290</p>
+                <p>(0961) 632 1989</p>
+                <div className="pt-2 space-y-1">
+                  <a href="mailto:info@stepupcanada.online" className="block hover:text-[#8B0000] hover:opacity-100 transition-all duration-200">info@stepupcanada.online</a>
+                </div>
+              </div>
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 text-xs">
-            <div className="flex flex-col gap-1">
-              <span className="opacity-30">© 2026 Step Up PH. All rights reserved.</span>
-              <div className="flex flex-col sm:flex-row gap-1 sm:gap-4 opacity-50">
-                <a href="mailto:admin@stepupcanada.online" className="hover:text-[#8B0000] hover:opacity-100 transition-all duration-200">admin@stepupcanada.online</a>
-                <a href="mailto:info@stepupcanada.online" className="hover:text-[#8B0000] hover:opacity-100 transition-all duration-200">info@stepupcanada.online</a>
-              </div>
-            </div>
+            <span className="opacity-30">© 2026 Step Up PH. All rights reserved.</span>
             <a
               href="https://www.stepupcanada.online/login"
               target="_blank"
@@ -671,18 +772,34 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode; titl
   );
 }
 
-function ProcessStep({ number, title, description }: { number: string; title: string; description: string }) {
+function ProcessStep({ number, title, description, image, reverse, imagePosition = 'center' }: { number: string; title: string; description: string; image: string; reverse?: boolean; imagePosition?: string }) {
   return (
-    <div className="flex gap-8 group">
-      <div className="flex-shrink-0">
-        <div className="relative">
-          <div className="text-[4rem] font-light text-[#8B0000] opacity-20 leading-none">{number}</div>
-          <div className="absolute bottom-0 left-0 w-full h-px bg-[#8B0000] transition-all duration-500 group-hover:w-[200%]" />
+    <div className={`group relative flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} h-auto md:h-72 overflow-hidden`}>
+
+      {/* Image side */}
+      <div className="relative w-full md:w-1/2 h-56 md:h-full overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          style={{ objectPosition: imagePosition }}
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
+        {/* Big number watermark on image */}
+        <div className={`absolute bottom-0 ${reverse ? 'right-4' : 'left-4'} text-[8rem] font-light text-white/10 leading-none select-none`}>
+          {number}
         </div>
+        {/* Red corner accent */}
+        <div className={`absolute top-0 ${reverse ? 'right-0' : 'left-0'} w-1 h-full bg-[#8B0000]`} />
       </div>
-      <div className="flex-1 pt-4">
-        <h3 className="mb-3 tracking-wide">{title}</h3>
-        <p className="text-base leading-relaxed opacity-70 font-light">{description}</p>
+
+      {/* Content side */}
+      <div className="relative w-full md:w-1/2 bg-white p-8 md:p-10 flex flex-col justify-center group-hover:bg-[#fafafa] transition-colors duration-300 border border-black/5">
+        <div className="text-xs tracking-[0.3em] text-[#8B0000] mb-4">STEP {number}</div>
+        <h3 className="text-black text-xl md:text-2xl font-light tracking-wide mb-4 leading-snug">{title}</h3>
+        <div className="w-8 h-px bg-[#8B0000] mb-4" />
+        <p className="text-black/50 text-sm leading-relaxed font-light">{description}</p>
       </div>
     </div>
   );
