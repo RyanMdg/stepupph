@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import heroImg from '../imports/hero.jpg';
+import logoImg from '../imports/WhatsApp_Image_2026-04-10_at_4.26.19_PM.jpeg';
 import {
   HiOutlineAcademicCap,
   HiOutlineBriefcase,
@@ -100,7 +102,7 @@ export default function App() {
           <div className="flex items-center justify-between h-20">
             <button onClick={() => scrollToSection('hero')} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
               <img
-                src="/src/imports/WhatsApp_Image_2026-04-10_at_4.26.19_PM.jpeg"
+                src={logoImg}
                 alt="Step Up Philippines"
                 className="h-16 w-auto object-contain"
               />
@@ -170,7 +172,7 @@ export default function App() {
       <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
         {/* Background image */}
         <img
-          src="/src/imports/hero.jpg"
+          src={heroImg}
           alt="Step Up Philippines"
           className="absolute inset-0 w-full h-full object-cover"
         />
