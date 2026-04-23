@@ -389,7 +389,7 @@ export default function App() {
           </AnimateIn>
 
           <AnimateIn delay={100} className="text-center mb-16 mt-6 text-lg opacity-70">
-            We offer flexible learning options: In-Center or Hybrid Setup
+            We offer flexible learning options: In-Center, Hybrid, or Full Online
           </AnimateIn>
 
           <div className="space-y-20 mt-20">
@@ -429,8 +429,61 @@ export default function App() {
         </div>
       </section>
 
-      {/* Our Center */}
+      {/* Our Trainers */}
       <section className="py-32 px-6 md:px-12 bg-[#F5F5F5]">
+        <div className="max-w-6xl mx-auto">
+          <AnimateIn>
+            <SectionTitle>Our Trainers</SectionTitle>
+          </AnimateIn>
+
+          <AnimateIn delay={100} className="mt-10 text-center text-lg opacity-70 font-light max-w-3xl mx-auto">
+            Our programs are delivered by highly qualified and industry-experienced trainers who bring both certification and real-world expertise into every session.
+          </AnimateIn>
+
+          <div className="grid md:grid-cols-2 gap-8 mt-16">
+            {[
+              {
+                title: 'IELTS Instructors',
+                description: 'Certified and experienced in structured, results-focused test preparation.',
+              },
+              {
+                title: 'CELPIP Instructors',
+                description: 'Level 2 Certified by Paragon, trained to deliver strategy-based coaching aligned with official test standards.',
+              },
+              {
+                title: 'Job Readiness Trainers',
+                description: 'With extensive experience in HR and recruitment, offering insider knowledge on what employers actually look for — from resume screening to interview performance.',
+              },
+              {
+                title: 'BPO Trainers',
+                description: 'With hands-on experience across the industry, from Customer Service Representative (CSR) roles to Trainer and Quality Assurance (QA), providing practical insights into hiring standards, communication expectations, and real call center scenarios.',
+              },
+            ].map((trainer, i) => (
+              <AnimateIn key={trainer.title} delay={i * 80}>
+                <div className="relative bg-white p-8 border border-black/5 transition-all duration-300 hover:-translate-y-1 group">
+                  <div className="absolute top-0 left-0 w-1 h-full bg-[#8B0000]" />
+                  <div className="pl-4">
+                    <h3 className="text-base tracking-wide mb-3 text-[#8B0000]">{trainer.title}</h3>
+                    <p className="text-sm leading-relaxed opacity-70 font-light">{trainer.description}</p>
+                  </div>
+                </div>
+              </AnimateIn>
+            ))}
+          </div>
+
+          <AnimateIn delay={200} className="mt-12">
+            <div className="bg-white border border-black/5 p-8 text-center">
+              <div className="w-8 h-px bg-[#8B0000] mx-auto mb-6" />
+              <p className="text-sm leading-relaxed opacity-70 font-light max-w-3xl mx-auto">
+                All trainers are supported by relevant academic backgrounds and are trained to deliver structured, targeted, and results-oriented sessions that prepare learners for real-world outcomes.
+              </p>
+            </div>
+          </AnimateIn>
+        </div>
+      </section>
+
+      {/* Our Center */}
+      <section className="py-32 px-6 md:px-12 bg-white">
         <div className="max-w-4xl mx-auto">
           <AnimateIn>
             <SectionTitle>Our Center</SectionTitle>
@@ -514,6 +567,7 @@ export default function App() {
 
                 <div>
                   <div className="text-xs tracking-widest text-[#8B0000] mb-2">EMAIL</div>
+                  <a href="mailto:stepuphilippines@gmail.com" className="text-sm font-light opacity-70 hover:opacity-100 hover:text-[#8B0000] transition-all duration-200 block">stepuphilippines@gmail.com</a>
                   <a href="mailto:admin@stepupcanada.online" className="text-sm font-light opacity-70 hover:opacity-100 hover:text-[#8B0000] transition-all duration-200 block">admin@stepupcanada.online</a>
                   <a href="mailto:info@stepupcanada.online" className="text-sm font-light opacity-70 hover:opacity-100 hover:text-[#8B0000] transition-all duration-200 block">info@stepupcanada.online</a>
                 </div>
@@ -722,6 +776,7 @@ export default function App() {
                 <p>(0927) 947 9290</p>
                 <p>(0961) 632 1989</p>
                 <div className="pt-2 space-y-1">
+                  <a href="mailto:stepuphilippines@gmail.com" className="block hover:text-[#8B0000] hover:opacity-100 transition-all duration-200">stepuphilippines@gmail.com</a>
                   <a href="mailto:info@stepupcanada.online" className="block hover:text-[#8B0000] hover:opacity-100 transition-all duration-200">info@stepupcanada.online</a>
                 </div>
               </div>
