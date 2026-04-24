@@ -2,6 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import heroImg from '../imports/hero.jpg';
 import logoImg from '../imports/WhatsApp_Image_2026-04-10_at_4.26.19_PM.jpeg';
+import model1 from '../imports/model1.png';
+import model2 from '../imports/model2.jpg';
+import model3 from '../imports/model3.jpeg';
+import model4 from '../imports/model4.jpeg';
+import model5 from '../imports/model5.jpeg';
+import model6 from '../imports/model6.jpeg';
 
 emailjs.init('sIAURMIM1n67a8qeS');
 import {
@@ -360,12 +366,12 @@ export default function App() {
 
           <div className="space-y-4">
             {[
-              { number: '01', title: 'Initial Consultation & Assessment', description: 'We start with a one-on-one session to understand your goals, current level, and specific needs — creating a learning plan aligned with what you want to achieve.', image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80', imagePosition: 'center' },
-              { number: '02', title: 'Program Recommendation', description: 'Based on your goals and assessment results, we recommend the most suitable program and structured learning plan tailored to your objectives.', image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&q=80' },
-              { number: '03', title: 'Structured Training Sessions', description: 'Attend guided sessions led by experienced instructors, following a strategic and results-oriented approach designed to build real-world skills.', image: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=800&q=80' },
-              { number: '04', title: 'Re-Assessment & Development Review', description: 'We conduct follow-up assessments to evaluate your progress and refine your learning plan, ensuring you stay on track toward your goals.', image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80' },
-              { number: '05', title: 'Continuous Feedback & Progress Monitoring', description: 'Receive consistent feedback and track your improvement through ongoing performance monitoring, ensuring steady and measurable results.', image: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=800&q=80' },
-              { number: '06', title: 'Achieve Your Goals', description: 'With the right guidance and structure, you gain the skills, confidence, and readiness needed to succeed in your career, exams, or global opportunities.', image: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80' },
+              { number: '01', title: 'Initial Consultation & Assessment', description: 'We start with a one-on-one session to understand your goals, current level, and specific needs — creating a learning plan aligned with what you want to achieve.', image: model2, imagePosition: 'center' },
+              { number: '02', title: 'Program Recommendation', description: 'Based on your goals and assessment results, we recommend the most suitable program and structured learning plan tailored to your objectives.', image: model3 },
+              { number: '03', title: 'Structured Training Sessions', description: 'Attend guided sessions led by experienced instructors, following a strategic and results-oriented approach designed to build real-world skills.', image: model1 },
+              { number: '04', title: 'Re-Assessment & Development Review', description: 'We conduct follow-up assessments to evaluate your progress and refine your learning plan, ensuring you stay on track toward your goals.', image: model4 },
+              { number: '05', title: 'Continuous Feedback & Progress Monitoring', description: 'Receive consistent feedback and track your improvement through ongoing performance monitoring, ensuring steady and measurable results.', image: model5 },
+              { number: '06', title: 'Achieve Your Goals', description: 'With the right guidance and structure, you gain the skills, confidence, and readiness needed to succeed in your career, exams, or global opportunities.', image: model6 },
             ].map((step, i) => (
               <AnimateIn key={step.number} delay={i * 60} direction={i % 2 === 0 ? 'left' : 'right'}>
                 <ProcessStep number={step.number} title={step.title} description={step.description} image={step.image} reverse={i % 2 !== 0} imagePosition={(step as any).imagePosition} />
@@ -373,10 +379,14 @@ export default function App() {
             ))}
           </div>
 
-          <AnimateIn delay={200} className="mt-16 text-center">
-            <p className="text-base text-black/40 font-light italic tracking-wide">
-              Your progress is guided every step of the way — from your first session to achieving real, measurable results.
-            </p>
+          <AnimateIn delay={200} className="mt-16">
+            <div className="relative border-l-4 border-[#8B0000] pl-8 py-4 max-w-3xl mx-auto">
+              <div className="text-[#8B0000] text-5xl font-serif leading-none mb-2 select-none">"</div>
+              <p className="text-lg text-black/70 font-light italic tracking-wide leading-relaxed">
+                Your progress is guided every step of the way — from your first session to achieving real, measurable results.
+              </p>
+              <div className="text-[#8B0000] text-5xl font-serif leading-none mt-2 text-right select-none">"</div>
+            </div>
           </AnimateIn>
         </div>
       </section>
@@ -861,10 +871,6 @@ function ProcessStep({ number, title, description, image, reverse, imagePosition
         />
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500" />
-        {/* Big number watermark on image */}
-        <div className={`absolute bottom-0 ${reverse ? 'right-4' : 'left-4'} text-[8rem] font-light text-white/10 leading-none select-none`}>
-          {number}
-        </div>
         {/* Red corner accent */}
         <div className={`absolute top-0 ${reverse ? 'right-0' : 'left-0'} w-1 h-full bg-[#8B0000]`} />
       </div>
