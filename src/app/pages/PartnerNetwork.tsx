@@ -5,7 +5,7 @@ import Rsd from "../../imports/rsd.jpeg";
 import Garuda from "../../imports/garuda.jpeg";
 
 export default function PartnerNetwork() {
-  const RecruitmentAgency = [z
+  const RecruitmentAgency = [
     {
       src: Talento,
       alt: "Talento-logo-img",
