@@ -2,10 +2,10 @@ import { Link } from "react-router";
 import { AnimateIn } from "../components/AnimateIn";
 import Talento from "../../imports/talento.jpeg";
 import Rsd from "../../imports/rsd.jpeg";
-import Garuda from "../../imports/Garuda.jpeg";
+import Garuda from "../../imports/garuda.jpeg";
 
 export default function PartnerNetwork() {
-  const RecruitmentAgency = [
+  const RecruitmentAgency = [z
     {
       src: Talento,
       alt: "Talento-logo-img",
