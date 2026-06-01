@@ -35,11 +35,12 @@ export default function Contact() {
     setFormStatus('sending');
     try {
       await emailjs.send('service_togvp1n', 'template_oacoo9o', {
+        form_type: TAB_CONFIG[activeTab].label,
         from_name: formData.name,
         from_email: formData.email,
         program: `[${TAB_CONFIG[activeTab].subject}] ${formData.program || formData.company || ''}`,
         message: formData.message,
-      });
+      }, import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
       setFormStatus('success');
       setFormData({ name: '', email: '', company: '', program: '', message: '' });
     } catch {
