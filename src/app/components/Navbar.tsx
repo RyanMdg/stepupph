@@ -9,6 +9,19 @@ const NAV = [
     label: "Job Seekers",
     to: "/job-seekers",
   },
+
+  // {
+  //   label: "Company",
+  //   children: [
+  //     { label: "About Us", to: "/about" },
+  //     { label: "Partner Network", to: "/partner-network" },
+  //   ],
+  // },
+  { label: "Partner Network", to: "/partner-network" },
+
+  { label: "About Us", to: "/about" },
+
+  { label: "Contact", to: "/contact" },
   {
     label: "For Business",
     children: [
@@ -16,14 +29,6 @@ const NAV = [
       { label: "Employers", to: "/employers" },
     ],
   },
-  {
-    label: "Company",
-    children: [
-      { label: "About Us", to: "/about" },
-      { label: "Partner Network", to: "/partner-network" },
-    ],
-  },
-  { label: "Contact", to: "/contact" },
 ];
 
 export default function Navbar() {

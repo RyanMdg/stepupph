@@ -3,7 +3,9 @@ import { AnimateIn } from "../components/AnimateIn";
 import Talento from "../../imports/talento.jpeg";
 import Rsd from "../../imports/rsd.jpeg";
 import Garuda from "../../imports/garuda.jpeg";
-
+import Seveneleven from "../../imports/711.jpeg";
+import BreadAndBerry from "../../imports/bread&berry.jpeg";
+import MoonBakes from "../../imports/moon_bakes.jpeg";
 export default function PartnerNetwork() {
   const RecruitmentAgency = [
     {
@@ -14,12 +16,24 @@ export default function PartnerNetwork() {
       src: Rsd,
       alt: "Rsd-logo-img",
     },
+    {
+      src: Garuda,
+      alt: "Garuda-logo-img",
+    },
   ];
 
   const DirectHiringCompanies = [
     {
-      src: Garuda,
+      src: Seveneleven,
       alt: "Garuda-logo-img",
+    },
+    {
+      src: BreadAndBerry,
+      alt: "BreadAndBerry-logo-img",
+    },
+    {
+      src: MoonBakes,
+      alt: "MoonBakes-logo-img",
     },
   ];
   return (
@@ -66,7 +80,7 @@ export default function PartnerNetwork() {
                   ))}
                 </div>
 
-                <div className="mt-8 text-center">
+                {/* <div className="mt-8 text-center">
                   <Link
                     to="/contact"
                     className="group relative inline-flex px-8 py-3 border border-[#8B0000] text-[#8B0000] overflow-hidden transition-all duration-300 text-xs tracking-widest"
@@ -76,7 +90,7 @@ export default function PartnerNetwork() {
                       BECOME A RECRUITMENT PARTNER
                     </span>
                   </Link>
-                </div>
+                </div> */}
               </div>
             </AnimateIn>
 
@@ -102,19 +116,19 @@ export default function PartnerNetwork() {
                     ))}
                   </div>
                 </div>
-                <div className="mt-8 text-center">
-                  <Link
-                    to="/contact"
-                    className="group relative inline-flex px-8 py-3 border border-[#8B0000] text-[#8B0000] overflow-hidden transition-all duration-300 text-xs tracking-widest"
-                  >
-                    <div className="absolute inset-0 bg-[#8B0000] translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
-                    <span className="relative z-10 group-hover:text-white transition-colors duration-300 absolute inset-0 flex items-center justify-center text-xs tracking-widest">
-                      PARTNER WITH US
-                    </span>
-                  </Link>
-                </div>
               </div>
             </AnimateIn>
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              to="/contact"
+              className="group relative inline-flex px-8 py-3 border border-[#8B0000] text-[#8B0000] overflow-hidden transition-all duration-300 text-xs tracking-widest"
+            >
+              <div className="absolute inset-0 bg-[#8B0000] translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
+              <span className="relative z-10 group-hover:text-white transition-colors duration-300 absolute inset-0 flex items-center justify-center text-xs tracking-widest">
+                PARTNER WITH US
+              </span>
+            </Link>
           </div>
         </div>
       </section>
