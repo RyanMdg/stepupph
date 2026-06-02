@@ -35,11 +35,6 @@ export default function Home() {
 
         <div className="relative z-10 max-w-7xl mx-auto w-full px-6 md:px-12 py-32">
           <div className="max-w-3xl">
-            {/* <div
-              className={`h-px bg-[#8B0000] mb-10 transition-all duration-1000 delay-200 origin-left ${
-                isVisible ? "w-16 opacity-100" : "w-0 opacity-0"
-              }`}
-            /> */}
             <div
               className={`text-xs tracking-[0.3em] text-[#ffffff] mb-4 transition-all duration-700 delay-300 ${
                 isVisible
@@ -99,7 +94,7 @@ export default function Home() {
                 to="/employers"
                 className="group relative px-8 py-4 border border-white/40 text-white overflow-hidden transition-all duration-300 text-sm tracking-wider text-center"
               >
-                <span className="relative z-10">I'm an employer</span>
+                <span className="relative z-10">I'm an Employer</span>
                 <div className="absolute inset-0 bg-[#8B0000] translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
               </Link>
             </div>
