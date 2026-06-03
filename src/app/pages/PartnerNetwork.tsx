@@ -6,6 +6,8 @@ import Garuda from "../../imports/garuda.jpeg";
 import Seveneleven from "../../imports/711.jpeg";
 import BreadAndBerry from "../../imports/bread&berry.jpeg";
 import MoonBakes from "../../imports/moon_bakes.jpeg";
+import RggLogo from "../../imports/rggLogo.png";
+import ReInforce from "../../imports/reenforce.jpeg";
 export default function PartnerNetwork() {
   const RecruitmentAgency = [
     {
@@ -19,6 +21,14 @@ export default function PartnerNetwork() {
     {
       src: Garuda,
       alt: "Garuda-logo-img",
+    },
+    {
+      src: ReInforce,
+      alt: "ReInforce-logo-img",
+    },
+    {
+      src: RggLogo,
+      alt: "Rgg-logo-img",
     },
   ];
 
