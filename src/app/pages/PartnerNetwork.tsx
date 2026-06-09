@@ -8,6 +8,10 @@ import BreadAndBerry from "../../imports/bread&berry.jpeg";
 import MoonBakes from "../../imports/moon_bakes.jpeg";
 import RggLogo from "../../imports/rggLogo.png";
 import ReInforce from "../../imports/reenforce.jpeg";
+import SanMig from "../../imports/sanmig.jpeg";
+import Scads from "../../imports/scads.jpeg";
+import Nexus from "../../imports/nexus.jpeg";
+import BiancaPascual from "../../imports/BiancaPascual.jpeg";
 export default function PartnerNetwork() {
   const RecruitmentAgency = [
     {
@@ -30,6 +34,14 @@ export default function PartnerNetwork() {
       src: RggLogo,
       alt: "Rgg-logo-img",
     },
+    {
+      src: Scads,
+      alt: "Scads-logo-img",
+    },
+    {
+      src: Nexus,
+      alt: "Nexus-logo-img",
+    },
   ];
 
   const DirectHiringCompanies = [
@@ -44,6 +56,17 @@ export default function PartnerNetwork() {
     {
       src: MoonBakes,
       alt: "MoonBakes-logo-img",
+    },
+    {
+      src: SanMig,
+      alt: "Sanmig-logo-img",
+    },
+  ];
+
+  const BenefitPartners = [
+    {
+      src: BiancaPascual,
+      alt: "BiancaPascual-logo-img",
     },
   ];
   return (
@@ -67,8 +90,8 @@ export default function PartnerNetwork() {
 
       {/* Partner Grid */}
       <section className="py-24 px-6 md:px-12 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-10">
+        <div className=" mx-auto">
+          <div className="grid md:grid-cols-3 gap-10">
             {/* Recruitment & Manpower Partners */}
             <AnimateIn>
               <div className="border border-black/5 p-10 h-full">
@@ -113,6 +136,29 @@ export default function PartnerNetwork() {
                 <div className="min-h-64 flex items-center justify-center ">
                   <div className="grid gap-10 sm:grid-cols-2">
                     {DirectHiringCompanies.map((logo) => (
+                      <div
+                        key={logo.alt}
+                        className="min-h-64 flex items-center justify-center  "
+                      >
+                        <img
+                          src={logo.src}
+                          alt={logo.alt}
+                          className="w-full max-w-[320px] h-auto object-contain"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </AnimateIn>
+            <AnimateIn delay={100}>
+              <div className="border border-black/5 p-10 h-full">
+                <div className="text-xs tracking-[0.3em] text-[#8B0000] mb-6">
+                  BENEFITS PARTNERS
+                </div>
+                <div className="min-h-64 flex items-center justify-center ">
+                  <div className="grid gap-10 sm:grid-cols-2">
+                    {BenefitPartners.map((logo) => (
                       <div
                         key={logo.alt}
                         className="min-h-64 flex items-center justify-center  "
