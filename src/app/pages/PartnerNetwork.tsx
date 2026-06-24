@@ -12,6 +12,8 @@ import SanMig from "../../imports/sanmig.jpeg";
 import Scads from "../../imports/scads.jpeg";
 import Nexus from "../../imports/nexus.jpeg";
 import BiancaPascual from "../../imports/BiancaPascual.jpeg";
+import RisingBusiness from "../../imports/rising_business.jpeg";
+import Episode8 from "../../imports/episode_8.jpeg";
 export default function PartnerNetwork() {
   const RecruitmentAgency = [
     {
@@ -42,6 +44,10 @@ export default function PartnerNetwork() {
       src: Nexus,
       alt: "Nexus-logo-img",
     },
+    {
+      src: RisingBusiness,
+      alt: "Rising-Business-logo-img",
+    },
   ];
 
   const DirectHiringCompanies = [
@@ -68,6 +74,10 @@ export default function PartnerNetwork() {
       src: BiancaPascual,
       alt: "BiancaPascual-logo-img",
     },
+    {
+      src: Episode8,
+      alt: "Episode8-logo-img",
+    },
   ];
   return (
     <>
@@ -91,18 +101,18 @@ export default function PartnerNetwork() {
       {/* Partner Grid */}
       <section className="py-24 px-6 md:px-12 bg-white">
         <div className=" mx-auto">
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-3 gap-5">
             {/* Recruitment & Manpower Partners */}
             <AnimateIn>
               <div className="border border-black/5 p-10 h-full">
                 <div className="text-xs tracking-[0.3em] text-[#8B0000] mb-6">
                   RECRUITMENT & MANPOWER PARTNERS
                 </div>
-                <div className="grid gap-10 sm:grid-cols-2">
+                <div className="grid gap-5 sm:grid-cols-2">
                   {RecruitmentAgency.map((logo) => (
                     <div
                       key={logo.alt}
-                      className="min-h-64 flex items-center justify-center  "
+                      className=" flex items-center justify-center  "
                     >
                       <img
                         src={logo.src}
@@ -134,11 +144,11 @@ export default function PartnerNetwork() {
                   DIRECT HIRING COMPANIES
                 </div>
                 <div className="min-h-64 flex items-center justify-center ">
-                  <div className="grid gap-10 sm:grid-cols-2">
+                  <div className="grid gap-5 sm:grid-cols-2">
                     {DirectHiringCompanies.map((logo) => (
                       <div
                         key={logo.alt}
-                        className="min-h-64 flex items-center justify-center  "
+                        className=" flex items-center justify-center  "
                       >
                         <img
                           src={logo.src}
@@ -157,11 +167,11 @@ export default function PartnerNetwork() {
                   BENEFITS PARTNERS
                 </div>
                 <div className="min-h-64 flex items-center justify-center ">
-                  <div className="grid gap-10 sm:grid-cols-2">
+                  <div className="grid gap-5 sm:grid-cols-2">
                     {BenefitPartners.map((logo) => (
                       <div
                         key={logo.alt}
-                        className="min-h-64 flex items-center justify-center  "
+                        className=" flex items-center justify-center  "
                       >
                         <img
                           src={logo.src}
