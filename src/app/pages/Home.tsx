@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import emailjs from "@emailjs/browser";
 import { Link } from "react-router";
 import { AnimateIn } from "../components/AnimateIn";
 import homeImg from "../../imports/jobinterview.jpg";
@@ -9,6 +10,18 @@ import {
   HiOutlineBriefcase,
   HiOutlineGlobeAlt,
 } from "react-icons/hi2";
+import FeatureBanner from "../../imports/featuredPartner.png";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import Bianca1 from "../../imports/Showcase1.jpg";
+import Bianca2 from "../../imports/showcase2.jpg";
+import Bianca3 from "../../imports/showcase3.jpg";
+import Bianca4 from "../../imports/showcase4.jpg";
+import BiancaLogo from "../../imports/BiancaPascual.jpeg";
 
 export default function Home() {
   const [isVisible, setIsVisible] = useState(false);
@@ -16,6 +29,47 @@ export default function Home() {
     const t = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(t);
   }, []);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const posts = [Bianca1, Bianca2, Bianca3, Bianca4];
+  const [showModal, setShowModal] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setIsLoading(true);
+
+    try {
+      await emailjs.send(
+        "service_togvp1n",
+        "template_nupd5cr",
+        {
+          name: formData.name,
+          email: formData.email,
+          time: new Date().toLocaleString(),
+        },
+        "sIAURMIM1n67a8qeS",
+      );
+
+      alert("Request sent successfully!");
+
+      setFormData({
+        name: "",
+        email: "",
+      });
+
+      setShowModal(false);
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -208,6 +262,224 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* FEATURED PARTNER */}
+      <section className=" pt-10 pb-20 bg-[#faf9f7]">
+        <div className="max-w-7xl mx-auto px-5">
+          {/* Carousel */}
+
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden p-8 h-full flex flex-col">
+              {/* Corner Ribbon */}
+              <div className="absolute top-8 -left-16 rotate-[-45deg] bg-gradient-to-r from-[#FFD54F] to-[#F4C430] text-[#7A0F18] font-extrabold uppercase tracking-wider text-sm px-20 py-2 shadow-lg z-20">
+                20–30% OFF
+              </div>
+
+              {/* Header */}
+              <div className="flex items-center gap-5 mt-6">
+                <img
+                  src={BiancaLogo}
+                  alt="Bianca Pascual"
+                  className="w-20 h-20 rounded-2xl object-cover shadow-md"
+                />
+
+                <div>
+                  <p className="uppercase tracking-[5px] text-[#9B111E] text-xs font-bold">
+                    Featured Partner
+                  </p>
+
+                  <h2 className="text-4xl font-bold text-gray-900 mt-1">
+                    Bianca Pascual
+                  </h2>
+
+                  <p className="text-gray-500 text-lg">
+                    International Abstract Artist
+                  </p>
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="w-24 h-1 bg-[#9B111E] rounded-full my-8"></div>
+
+              {/* Description */}
+              <p className="text-gray-600 leading-8 text-lg">
+                Own a masterpiece by internationally recognized artist
+                <span className="font-semibold text-black">
+                  {" "}
+                  Bianca Pascual.
+                </span>
+                <br />
+                <br />
+                As a valued member of the Step Up Philippines Network, enjoy an
+                exclusive{" "}
+                <span className="font-bold text-[#9B111E]">
+                  20%–30% discount
+                </span>{" "}
+                on selected artworks while supporting an artist whose work has
+                inspired collectors both locally and internationally.
+              </p>
+
+              {/* Achievement Cards */}
+              <div className="grid grid-cols-2 gap-4 mt-8">
+                <div className="bg-[#F8F8F8] rounded-xl p-5 border">
+                  <h3 className="font-bold text-lg">World Record</h3>
+                  <p className="text-gray-500 text-sm mt-1">
+                    Talent Record Book 2025
+                  </p>
+                </div>
+
+                <div className="bg-[#F8F8F8] rounded-xl p-5 border">
+                  <h3 className="font-bold text-lg">International</h3>
+                  <p className="text-gray-500 text-sm mt-1">
+                    Featured Exhibitions
+                  </p>
+                </div>
+
+                <div className="bg-[#F8F8F8] rounded-xl p-5 border">
+                  <h3 className="font-bold text-lg">Contemporary</h3>
+                  <p className="text-gray-500 text-sm mt-1">
+                    Abstract Paintings
+                  </p>
+                </div>
+
+                <div className="bg-[#F8F8F8] rounded-xl p-5 border">
+                  <h3 className="font-bold text-lg">Collected</h3>
+                  <p className="text-gray-500 text-sm mt-1">Local & Abroad</p>
+                </div>
+              </div>
+
+              {/* Quote */}
+              <div className="mt-8 border-l-4 border-[#9B111E] pl-5">
+                <p className="italic text-gray-500">
+                  "I express myself fully in my painting."
+                </p>
+
+                <p className="mt-2 text-[#9B111E] font-semibold">
+                  — Bianca Pascual
+                </p>
+              </div>
+
+              {/* CTA */}
+              <button
+                onClick={() => setShowModal(true)}
+                className="mt-10 bg-gradient-to-r from-[#9B111E] to-[#C4162A]
+               hover:from-[#870d17] hover:to-[#9B111E]
+               transition-all duration-300
+               text-white py-4 rounded-xl text-lg font-semibold
+               shadow-lg hover:shadow-xl hover:scale-[1.02]"
+              >
+                Claim Member Discount
+              </button>
+            </div>
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+              }}
+              loop
+              slidesPerView={1}
+              spaceBetween={0}
+              className="w-[500px] lg:w-[470px]"
+            >
+              {posts.map((post, index) => (
+                <SwiperSlide key={index}>
+                  <img
+                    src={post}
+                    alt={`Partner ${index + 1}`}
+                    className="w-full h-[550px] object-cover rounded-xl"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
+      </section>
+      {showModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-md shadow-2xl w-[90%] max-w-lg p-8 relative">
+            {/* Close */}
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 right-4 text-2xl text-gray-400 hover:text-red-700"
+            >
+              ✕
+            </button>
+
+            {/* Header */}
+
+            <div className="text-center">
+              <h2 className="text-3xl font-bold mt-5">
+                Claim Your Member Discount
+              </h2>
+
+              <p className="text-gray-500 mt-2">
+                Fill out the form below and our team will contact you regarding
+                Bianca Pascual's exclusive
+                <span className="font-bold text-[#9B111E]">
+                  {" "}
+                  20–30% OFF
+                </span>{" "}
+                offer.
+              </p>
+            </div>
+
+            {/* Form */}
+
+            <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+              <div className=" flex flex-col">
+                <label className="font-medium">Full Name</label>
+
+                <input
+                  type="text"
+                  placeholder="Enter your full name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                  className="..."
+                />
+              </div>
+
+              <div className=" flex flex-col">
+                <label className="font-medium">Email Address</label>
+
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className="..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`w-full py-4 rounded-xl text-lg font-semibold transition-all duration-300
+    ${
+      isLoading
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-[#9B111E] hover:bg-[#7b0f18] text-white"
+    }`}
+              >
+                {isLoading ? (
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    <span>Sending Request...</span>
+                  </div>
+                ) : (
+                  "Send Request"
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* ── STAT STRIP ── */}
       <section className="py-14 px-6 md:px-12 bg-[#8B0000]">
