@@ -14,6 +14,7 @@ import Nexus from "../../imports/nexus.jpeg";
 import BiancaPascual from "../../imports/BiancaPascual.jpeg";
 import RisingBusiness from "../../imports/rising_business.jpeg";
 import Episode8 from "../../imports/episode_8.jpeg";
+import PacificCross from "../../imports/pacificCross.jpeg";
 export default function PartnerNetwork() {
   const RecruitmentAgency = [
     {
@@ -66,6 +67,10 @@ export default function PartnerNetwork() {
     {
       src: SanMig,
       alt: "Sanmig-logo-img",
+    },
+    {
+      src: PacificCross,
+      alt: "Pacific-Cross-logo-img",
     },
   ];
 
@@ -140,8 +145,8 @@ export default function PartnerNetwork() {
             {/* Direct Hiring Companies */}
             <AnimateIn delay={100}>
               <div className="border border-black/5 p-10 h-full">
-                <div className="text-xs tracking-[0.3em] text-[#8B0000] mb-6">
-                  DIRECT HIRING COMPANIES
+                <div className="text-xs uppercase tracking-[0.3em] text-[#8B0000] mb-6">
+                  Industry Partners
                 </div>
                 <div className="min-h-64 flex items-center justify-center ">
                   <div className="grid gap-5 sm:grid-cols-2">
